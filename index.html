@@ -13,12 +13,7 @@
 
         <div class="matrix-section">
             <div class="matrix-panels-container" id="matrix-panels-container">
-                <!-- Panel Matriks A, Operasi Biner A-B, Panel Matriks B, dst. -->
-                <!-- AKAN DITAMBAHKAN SECARA DINAMIS OLEH script.js -->
-
-                <!-- Tombol Tambah Matriks. JS akan menyisipkan panel baru SEBELUM tombol ini -->
-                <button id="add-matrix-btn" title="Add new matrix panel">+</button>
-            </div>
+                </div>
         </div>
 
         <div class="custom-expression">
@@ -34,55 +29,37 @@
                 Sig. digits:
                 <input type="number" id="sig-digits-input" value="4" min="1" max="15" disabled>
             </label>
-            <button id="clean-output-btn">Clean Output</button> <!-- Tombol Clean Output Umum -->
-            <button id="reset-all-btn" title="Reset All"><i class="fas fa-sync-alt"></i> Reset</button>
+            <button id="clean-output-btn">Clean Output</button> <button id="reset-all-btn" title="Reset All"><i class="fas fa-sync-alt"></i> Reset</button>
         </div>
 
         <div class="output-area">
             <h2>Result</h2>
 
-            <!-- Kontainer untuk hasil umum (operasi sederhana tanpa banyak metode) -->
             <div id="result-general-output">
                 Select an operation to see the result.
             </div>
 
-            <!-- Kontainer untuk hasil detail (mis. Determinan, Invers dengan berbagai metode) -->
             <div id="result-detailed-view" class="hidden">
-                <!-- Bagian atas: Input Matrix, Simbol Operasi, Hasil Utama -->
                 <div class="result-summary-display">
                     <div id="result-summary-input-matrix">
-                        <!-- Diisi oleh JS -->
-                    </div>
+                        </div>
                     <div id="result-summary-operation-symbol">
-                        <!-- Diisi oleh JS -->
-                    </div>
+                        </div>
                     <div id="result-summary-main-result">
-                       <!-- Diisi oleh JS -->
-                    </div>
+                       </div>
                 </div>
 
-                <!-- Tombol aksi untuk hasil yang ditampilkan (Copy, Share, Insert ke A/B) -->
                 <div class="result-main-actions">
-                    <button id="insert-result-a-btn" title="Insert result into Matrix A">Masukkan di A</button>
-                    <button id="insert-result-b-btn" title="Insert result into Matrix B">Masukkan di B</button>
                     <button id="clean-output-btn-detailed" title="Clean current result display"><i class="fas fa-trash"></i></button>
                     <button id="copy-result-btn-detailed" title="Copy result and details"><i class="fas fa-copy"></i></button>
                     <button id="share-result-btn-detailed" title="Share result"><i class="fas fa-share-alt"></i></button>
                 </div>
 
-                <!-- Kontainer untuk berbagai metode perhitungan detail -->
                 <div id="calculation-methods-container">
-                    <!-- Diisi oleh JS dengan elemen <details> -->
-                </div>
+                    </div>
             </div>
-        </div> <!-- Akhir .output-area -->
-
-    </div> <!-- Akhir .matrix-calculator -->
-
-    <!-- Library Math.js - Penting untuk RREF, LU, Cholesky -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.8.0/math.min.js"></script>
+        </div> </div> <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.8.0/math.min.js"></script>
     <script src="script.js"></script>
-    <!-- MathJax untuk render LaTeX -->
     <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>
         // Render MathJax setiap kali detail calculation diubah

@@ -15,28 +15,26 @@
             <div class="matrix-panels-container" id="matrix-panels-container">
                 </div>
         </div>
-
         <div class="custom-expression">
-            <input type="text" id="custom-expr-input" placeholder="e.g., 2*A + B or inv(A)">
+            <input type="text" id="custom-expr-input" placeholder="cth., 2*A + B atau inv(A)">
             <button id="eval-expr-btn">=</button>
         </div>
-
         <div class="controls">
             <label>
-                <input type="checkbox" id="display-decimals-check"> Display decimals
+                <input type="checkbox" id="display-decimals-check"> Tampilkan desimal
             </label>
             <label>
-                Sig. digits:
+                Angka signifikan:
                 <input type="number" id="sig-digits-input" value="4" min="1" max="15" disabled>
             </label>
-            <button id="clean-output-btn">Clean Output</button> <button id="reset-all-btn" title="Reset All"><i class="fas fa-sync-alt"></i> Reset</button>
+            <button id="clean-output-btn">Bersihkan Output</button> 
+            <button id="reset-all-btn" title="Atur Ulang Semua"><i class="fas fa-sync-alt"></i> Atur Ulang</button>
         </div>
-
         <div class="output-area">
-            <h2>Result</h2>
+            <h2>Hasil</h2>
 
             <div id="result-general-output">
-                Select an operation to see the result.
+                Pilih operasi untuk melihat hasil.
             </div>
 
             <div id="result-detailed-view" class="hidden">
@@ -48,21 +46,22 @@
                     <div id="result-summary-main-result">
                        </div>
                 </div>
-
                 <div class="result-main-actions">
-                    <button id="clean-output-btn-detailed" title="Clean current result display"><i class="fas fa-trash"></i></button>
-                    <button id="copy-result-btn-detailed" title="Copy result and details"><i class="fas fa-copy"></i></button>
-                    <button id="share-result-btn-detailed" title="Share result"><i class="fas fa-share-alt"></i></button>
+                    <button id="clean-output-btn-detailed" title="Bersihkan tampilan hasil saat ini"><i class="fas fa-trash"></i></button>
+                    <button id="copy-result-btn-detailed" title="Salin hasil dan detail"><i class="fas fa-copy"></i></button>
+                    <button id="share-result-btn-detailed" title="Bagikan hasil"><i class="fas fa-share-alt"></i></button>
                 </div>
 
                 <div id="calculation-methods-container">
                     </div>
             </div>
-        </div> </div> <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.8.0/math.min.js"></script>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.8.0/math.min.js"></script>
     <script src="script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>
-        // Render MathJax setiap kali detail calculation diubah
+        // Render MathJax setiap kali detail perhitungan diubah
         const calcContainer = document.getElementById('calculation-methods-container');
         const observer = new MutationObserver(() => {
             if (window.MathJax) MathJax.typesetPromise();

@@ -2,6 +2,8 @@
 
 Aplikasi web interaktif untuk melakukan berbagai operasi matriks secara dinamis, menggunakan Python (Flask) di sisi backend dan JavaScript di sisi frontend.
 
+<img width="960" alt="Screenshot 2025-05-30 165217" src="https://github.com/user-attachments/assets/50fc64a5-37f2-4841-936a-d66c3cbfcc10" />
+
 ## ✨ Fitur
 
 - Input Matriks A & B yang bisa diubah ukuran baris dan kolomnya
@@ -15,7 +17,7 @@ Aplikasi web interaktif untuk melakukan berbagai operasi matriks secara dinamis,
   - Transpos
   - Perkalian Skalar
 - Mendukung input pecahan (`1/2`, `2.5`, dll)
-- Output ditampilkan dalam format pecahan untuk akurasi
+- Output ditampilkan dalam format pecahan 
 
 ## 🛠️ Teknologi
 

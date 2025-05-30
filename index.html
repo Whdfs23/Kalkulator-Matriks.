@@ -5,68 +5,65 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kalkulator Matriks</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <div class="matrix-calculator">
+    <div class="container">
         <h1>Kalkulator Matriks</h1>
-
         <div class="matrix-section">
-            <div class="matrix-panels-container" id="matrix-panels-container">
-                </div>
-        </div>
-        <div class="custom-expression">
-            <input type="text" id="custom-expr-input" placeholder="cth., 2*A + B atau inv(A)">
-            <button id="eval-expr-btn">=</button>
-        </div>
-        <div class="controls">
-            <label>
-                <input type="checkbox" id="display-decimals-check"> Tampilkan desimal
-            </label>
-            <label>
-                Angka signifikan:
-                <input type="number" id="sig-digits-input" value="4" min="1" max="15" disabled>
-            </label>
-            <button id="clean-output-btn">Bersihkan Output</button> 
-            <button id="reset-all-btn" title="Atur Ulang Semua"><i class="fas fa-sync-alt"></i> Atur Ulang</button>
-        </div>
-        <div class="output-area">
-            <h2>Hasil</h2>
-
-            <div id="result-general-output">
-                Pilih operasi untuk melihat hasil.
-            </div>
-
-            <div id="result-detailed-view" class="hidden">
-                <div class="result-summary-display">
-                    <div id="result-summary-input-matrix">
+            <div class="matrix-container">
+                <div class="matrix-header">
+                    <h2>Matriks A</h2>
+                        <div class="matrix-controls">
+                            <button onclick="changeMatrixSize('A', 'row', -1)">Baris: -</button>
+                            <button onclick="changeMatrixSize('A', 'row', 1)">Baris: +</button>
+                            <button onclick="changeMatrixSize('A', 'col', -1)">Kolom: -</button>
+                            <button onclick="changeMatrixSize('A', 'col', 1)">Kolom: +</button>
                         </div>
-                    <div id="result-summary-operation-symbol">
-                        </div>
-                    <div id="result-summary-main-result">
-                       </div>
                 </div>
-                <div class="result-main-actions">
-                    <button id="clean-output-btn-detailed" title="Bersihkan tampilan hasil saat ini"><i class="fas fa-trash"></i></button>
-                    <button id="copy-result-btn-detailed" title="Salin hasil dan detail"><i class="fas fa-copy"></i></button>
-                    <button id="share-result-btn-detailed" title="Bagikan hasil"><i class="fas fa-share-alt"></i></button>
+                <div id="matrixA" class="matrix-input"></div>
+                <div class="matrix-ops">
+                    <button onclick="hitung('detA')">Determinan</button>
+                    <button onclick="hitung('invA')">Invers</button>
+                    <button onclick="hitung('transA')">Transpos</button>
+                    <button onclick="hitung('skalarA')">Kalikan dengan</button>
+                    <input type="number" id="scalarA" value="2">
                 </div>
-
-                <div id="calculation-methods-container">
-                    </div>
             </div>
+            <div class="matrix-buttons">
+                <button onclick="hitung('perkalian')">A x B</button>
+                <button onclick="hitung('penjumlahan')">A + B</button>
+                <button onclick="hitung('pengurangan')">A - B</button>
+            </div>
+            <div class="matrix-container">
+                <div class="matrix-header">
+                    <h2>Matriks B</h2>
+                        <div class="matrix-controls">
+                            <button onclick="changeMatrixSize('B', 'row', -1)">Baris: -</button>
+                            <button onclick="changeMatrixSize('B', 'row', 1)">Baris: +</button>
+                            <button onclick="changeMatrixSize('B', 'col', -1)">Kolom: -</button>
+                            <button onclick="changeMatrixSize('B', 'col', 1)">Kolom: +</button>
+                        </div>
+                </div>
+                <div id="matrixB" class="matrix-input"></div>
+                <div class="matrix-ops">
+                    <button onclick="hitung('detB')">Determinan</button>
+                    <button onclick="hitung('invB')">Invers</button>
+                    <button onclick="hitung('transB')">Transpos</button>
+                    <input type="number" id="scalarB" value="2">
+                    <button onclick="hitung('skalarB')">Kalikan dengan</button>
+                </div>
+            </div>
+        </div>
+        <div class="hasil-section">
+            <div class="hasil-header"><h2 class="text-Hasil">Hasil</h2>
+                <button onclick="resetAll()" class="reset-button">Reset</button>
+            </div>
+                <div class="matrix-output">
+                    <pre id="hasil">Pilih operasi untuk melihat hasil.</pre>
+                </div>
         </div>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.8.0/math.min.js"></script>
+
     <script src="script.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>
-        // Render MathJax setiap kali detail perhitungan diubah
-        const calcContainer = document.getElementById('calculation-methods-container');
-        const observer = new MutationObserver(() => {
-            if (window.MathJax) MathJax.typesetPromise();
-        });
-        if (calcContainer) observer.observe(calcContainer, { childList: true, subtree: true });
-    </script>
 </body>
 </html>

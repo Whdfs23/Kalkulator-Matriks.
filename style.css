@@ -1,616 +1,213 @@
 :root {
-    --matrix-gap: 5px;
-    --panel-gap: 20px;
-    --input-size: 40px;
-    --border-color: #ccc;
-    --button-bg: #f0f0f0;
-    --button-hover-bg: #e0e0e0;
-    --accent-color: #007bff;
-  }
-  
-  body {
-    font-family: sans-serif;
-    margin: 0;
-    padding: 20px;
-    background-color: #f8f9fa;
-    color: #333;
-  }
-  
-  .matrix-calculator {
-    max-width: 1200px;
-    margin: 0 auto;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  h1, h2 {
-    text-align: center;
-    color: var(--accent-color);
-    margin-bottom: 20px;
-  }
-  
-  /* Layout Panel Matriks */
-  .matrix-section {
-    margin-bottom: 20px;
-    position: relative; /* For positioning the add button */
-  }
-  
-  .matrix-panels-container {
-    display: flex;
-    flex-wrap: wrap; /* Allow panels to wrap on smaller screens */
-    gap: var(--panel-gap);
-    align-items: flex-start; /* Align panels at the top */
-  }
-  
-  .matrix-panel {
-    border: 1px solid var(--border-color);
-    border-radius: 5px;
-    padding: 15px;
-    background-color: #fff;
-    flex: 1; /* Allow panels to grow */
-    min-width: 300px; /* Minimum width before wrapping */
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-  }
-  
-  .panel-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 10px;
-    border-bottom: 1px solid var(--border-color);
-    padding-bottom: 10px;
-    margin-bottom: 10px;
-  }
-  
-  .matrix-name {
-    font-weight: bold;
-    font-size: 1.1em;
-    color: var(--accent-color);
-  }
-  
-  .dimension-controls {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    font-size: 0.9em;
-  }
-  
-  .dimension-controls label {
-    margin-right: 5px;
-  }
-  
-  .dimension-controls span {
-     margin: 0 3px;
-  }
-  .dims {
-    font-weight: bold;
-    min-width: 30px; /* Ensure space for dims */
-    text-align: center;
-  }
-  
-  
-  .panel-actions {
-    display: flex;
-    gap: 5px;
-  }
-  .panel-actions .remove-matrix-btn {
-    background-color: #ffdddd;
-    color: #dc3545;
-    border: 1px solid #dc3545;
-  }
-  .panel-actions .remove-matrix-btn:hover {
-     background-color: #f8c8c8;
-  }
-  
-  
-  /* Grid Input Matriks */
-  .matrix-grid {
-    display: grid;
-    gap: var(--matrix-gap);
-    /* Dinamis diatur oleh JS: grid-template-rows & grid-template-columns */
-    /* --rows dan --cols akan diatur oleh JS di style attribute elemen */
-    grid-template-rows: repeat(var(--rows, 3), var(--input-size));
-    grid-template-columns: repeat(var(--cols, 3), var(--input-size));
-    justify-content: center; /* Center grid if panel is wider */
-    margin: 10px auto; /* Center horizontally */
-    max-width: fit-content; /* Prevent grid stretching */
-    padding: 5px; /* Padding di sekitar input fields */
-    border: 1px solid #ddd;
-    background-color: #f9f9f9; /* Latar belakang area grid */
-    border-radius: 3px;
-  }
-  
-  .matrix-grid input {
-    width: var(--input-size);
-    height: var(--input-size);
-    text-align: center;
-    border: 1px solid var(--border-color);
-    border-radius: 3px;
-    font-size: 1em;
-    box-sizing: border-box;
-    appearance: textfield; /* Standard property for compatibility */
-    -moz-appearance: textfield; /* Firefox */
-  }
-  /* Hide spin buttons on number inputs */
-  .matrix-grid input::-webkit-outer-spin-button,
-  .matrix-grid input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-  .matrix-grid input:focus {
-      border-color: var(--accent-color);
-      outline: none;
-      box-shadow: 0 0 0 2px rgba(0,123,255,.25);
-  }
-  
-  
-  /* Tombol Operasi */
-  .matrix-operations-single,
-  .matrix-operations-binary {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    justify-content: center;
-  }
-  
-  .matrix-operations-single > div { /* Container for button + input */
-    display: flex;
-    align-items: center;
-    gap: 5px;
-  }
-  
-  .matrix-operations-binary {
-    border-left: 1px dashed var(--border-color);
-    border-right: 1px dashed var(--border-color);
-    padding: 10px 15px; /* Increased padding for better spacing */
-    margin: auto 0; /* Vertically center between panels when flex-direction is row */
-    display: flex;
-    flex-direction: column; /* Stack buttons vertically */
-    align-items: center;
-    gap: 10px;
-    flex-shrink: 0; /* Prevent shrinking */
-    background-color: #fdfdfd; /* Slightly different background */
-    border-radius: 4px; /* Rounded corners for this section */
-  }
-  .copy-buttons {
-    display: flex;
-    gap: 5px;
-    margin-top: 5px; /* Space above copy buttons */
-  }
-  
-  .op-btn, .dim-btn, .icon-btn, #add-matrix-btn, #eval-expr-btn, #clean-output-btn, #reset-all-btn, .copy-btn {
-    padding: 5px 10px;
-    border: 1px solid var(--border-color);
-    background-color: var(--button-bg);
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.2s ease, border-color 0.2s ease;
-    font-size: 0.9em;
-  }
-  
-  .op-btn:hover, .dim-btn:hover, .icon-btn:hover, #add-matrix-btn:hover, #eval-expr-btn:hover, #clean-output-btn:hover, #reset-all-btn:hover, .copy-btn:hover {
-    background-color: var(--button-hover-bg);
-    border-color: #aaa;
-  }
-  
-  /* Specific button styles */
-  .op-btn {
-      background-color: var(--accent-color);
-      color: white;
-      border-color: var(--accent-color);
-  }
-  .op-btn:hover {
-      background-color: #0056b3;
-      border-color: #0056b3;
-  }
-  
-  
-  .dim-btn {
-    padding: 2px 6px;
-    line-height: 1;
-  }
-  
-  .icon-btn {
-    padding: 5px 8px;
-  }
-  
-  .icon-btn i {
-    pointer-events: none; /* Prevent icon from capturing click */
-  }
-  
-  
-  .op-input {
-    width: 50px;
-    padding: 5px;
-    border: 1px solid var(--border-color);
-    border-radius: 3px;
-    text-align: center;
-  }
-  
-  /* Tombol Tambah Matriks */
-  #add-matrix-btn {
-    /* position: absolute; */ /* Dihapus agar flow normal di dalam container */
-    /* top: -15px;  */
-    /* right: -15px; */
-    width: 35px; /* Ukuran disesuaikan */
-    height: 35px;
-    border-radius: 50%;
-    font-size: 1.5em; /* Ukuran plus sign */
-    line-height: 1;
-    background-color: #28a745; /* Warna hijau untuk tambah */
-    color: white;
-    border: none;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.2);
-    margin-left: auto; /* Jika ingin di ujung kanan flex container */
-    align-self: flex-start; /* Sejajar dengan bagian atas panel jika container adalah flex column */
-  }
-  #add-matrix-btn:hover {
-    background-color: #218838;
-  }
-  
-  /* Ekspresi Kustom */
-  .custom-expression {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
-    align-items: center;
-  }
-  
-  #custom-expr-input {
-    flex-grow: 1;
-    padding: 8px;
-    border: 1px solid var(--border-color);
-    border-radius: 4px;
-    font-size: 1em;
-  }
-  
-  #eval-expr-btn {
-    padding: 8px 15px;
-    font-weight: bold;
-    background-color: #ffc107; /* Warna kuning untuk evaluasi */
-    color: #212529;
-    border-color: #ffc107;
-  }
-  #eval-expr-btn:hover {
-    background-color: #e0a800;
-    border-color: #d39e00;
-  }
-  
-  /* Kontrol Tampilan */
-  .controls {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    align-items: center;
-    margin-bottom: 20px;
-    padding: 10px;
-    background-color: #f0f0f0;
-    border-radius: 5px;
-  }
-  
-  .controls label {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-  }
-  
-  #sig-digits-input {
-    width: 50px;
-    padding: 3px 5px;
-  }
-  #sig-digits-input:disabled {
-    background-color: #eee;
-    cursor: not-allowed;
-  }
-  #clean-output-btn, #reset-all-btn {
-      background-color: #6c757d; /* Gray for utility buttons */
-      color: white;
-      border-color: #6c757d;
-      padding: 6px 10px; /* Padding konsisten */
-  }
-  #clean-output-btn:hover, #reset-all-btn:hover {
-      background-color: #5a6268;
-      border-color: #545b62;
-  }
-  
-  
-  /* Area Output */
-  .output-area {
-    margin-top: 20px;
-    border: 1px solid var(--border-color);
-    border-radius: 5px;
-    padding: 15px;
-    background-color: #e9ecef; /* Latar belakang area output */
-    min-height: 100px;
-  }
-  
-  .output-area h2 {
-    margin-top: 0;
-    margin-bottom: 15px;
-    text-align: left;
-    font-size: 1.2em;
-    color: #495057; /* Warna teks judul output */
-  }
-  
-  /* Styles for DETAILED result display */
-  #result-detailed-view.hidden { display: none !important; } /* Use !important to ensure hiding */
-  
-  .result-summary-display {
-      display: flex;
-      align-items: center; /* Sejajarkan item secara vertikal */
-      justify-content: center; /* Pusatkan item */
-      gap: 15px; /* Spasi antar elemen */
-      font-family: 'Courier New', Courier, monospace;
-      font-size: 1.1em; /* Ukuran font yang sedikit lebih besar */
-      margin-bottom: 15px;
-      padding: 10px;
-      background-color: #f8f9fa; /* Latar belakang terang untuk ringkasan */
-      border: 1px solid #dee2e6;
-      border-radius: 4px;
-      flex-wrap: wrap; /* Biarkan membungkus jika tidak cukup ruang */
-      overflow-x: auto; /* Scroll jika terlalu lebar */
-  }
-  
-  #result-summary-input-matrix,
-  #result-summary-main-result {
-      white-space: pre; /* Pertahankan format matriks */
-      line-height: 1.5;
-      padding: 5px 8px;
-      border: 1px solid #ced4da;
-      background-color: #fff;
-      border-radius: 3px;
-      max-width: 100%; /* Agar tidak meluber dari container */
-      overflow-x: auto; /* Scroll jika matriks terlalu lebar */
-  }
-  #result-summary-main-result .result-scalar {
-      font-weight: bold;
-      padding: 5px 8px;
-      display: inline-block; /* Agar padding bekerja */
-  }
-  #result-summary-main-result div { /* Untuk styling L, U, P */
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
-  }
-  #result-summary-main-result div strong { /* Label L, U, P */
-      margin-top: 5px;
-      display: block;
-      font-size: 0.9em;
-  }
-  
-  
-  #result-summary-operation-symbol {
-      font-weight: bold;
-      font-size: 1.5em; /* Simbol operasi lebih besar */
-      color: #007bff;
-      padding: 0 10px; /* Spasi di sekitar simbol */
-  }
-  
-  .result-main-actions {
-      display: flex;
-      justify-content: flex-end; /* Tombol aksi di kanan */
-      flex-wrap: wrap; /* Bungkus tombol jika perlu */
-      gap: 10px;
-      margin-bottom: 20px;
-      padding-bottom: 15px;
-      border-bottom: 1px solid #eee;
-  }
-  
-  .result-main-actions button {
-      padding: 6px 12px;
-      font-size: 0.9em;
-      background-color: #6c757d; /* Abu-abu untuk tombol aksi umum */
-      color: white;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      display: inline-flex; /* Agar ikon dan teks sejajar */
-      align-items: center;
-      gap: 5px; /* Spasi antara ikon dan teks */
-  }
-  .result-main-actions button:hover {
-      background-color: #5a6268;
-  }
-  /* Removed empty ruleset for .result-main-actions button i */
-  
-  
-  #calculation-methods-container { margin-top: 10px; }
-  #calculation-methods-container.hidden { display: none !important; } /* Redundant if parent is hidden */
-  
-  #calculation-methods-container details {
-      background-color: #fff; /* Latar putih untuk setiap detail */
-      border: 1px solid #e0e0e0;
-      border-radius: 5px;
-      margin-bottom: 10px;
-      overflow: hidden;
-  }
-  
-  #calculation-methods-container summary {
-      padding: 10px 15px;
-      cursor: pointer;
-      font-weight: bold;
-      color: #0056b3; /* Biru lebih gelap untuk judul summary */
-      background-color: #f0f8ff; /* Alice blue atau latar yang sangat terang */
-      border-bottom: 1px solid #e0e0e0;
-      list-style-position: inside; /* Agar panah sejajar */
-      transition: background-color 0.2s;
-  }
-  #calculation-methods-container summary:hover {
-      background-color: #e6f2ff;
-  }
-  #calculation-methods-container details[open] summary {
-      background-color: #d9eaff; /* Sedikit lebih gelap saat terbuka */
-      border-bottom-style: dashed; /* Indikator terbuka */
-  }
-  
-  #calculation-methods-container details > div { /* Konten di dalam <details> */
-      padding: 15px;
-      background-color: #fdfdfd; /* Latar yang sangat terang, hampir putih */
-      color: #333;
-      font-family: 'Courier New', Courier, monospace; /* Monospace untuk detail langkah */
-      white-space: pre-wrap; /* Agar teks panjang bisa wrap */
-      line-height: 1.6;
-      font-size: 0.95em; /* Sedikit lebih besar untuk keterbacaan */
-      border-top: 1px dashed #eee; /* Garis pemisah halus */
-      max-height: 400px; /* Batasi tinggi detail, tambahkan scroll */
-      overflow-y: auto; /* Scroll vertikal jika konten panjang */
-  }
-  #calculation-methods-container pre {
-      margin: 0;
-      font-family: inherit;
-      font-size: inherit;
-      background: none;
-      padding: 0;
-      color: inherit;
-      border: none;
-      white-space: pre-wrap;
-  }
-  
-  
-  /* Styles for GENERAL result display */
-  #result-general-output {
-      padding: 10px;
-      color: #495057;
-      font-style: italic;
-  }
-  #result-general-output.hidden { display: none !important; }
-  
-  #result-general-output .result-title {
-      display: block;
-      font-weight: bold;
-      color: #212529;
-      margin-bottom: 5px;
-      font-style: normal;
-  }
-  #result-general-output .result-scalar {
-      font-size: 1.2em;
-      font-weight: bold;
-      font-style: normal;
-  }
-  #result-general-output pre.matrix-output { /* For matrix output in general view */
-      background-color: #fff;
-      border: 1px solid #dee2e6;
-      padding: 8px;
-      border-radius: 3px;
-      color: #212529;
-      font-style: normal;
-      margin-top: 5px;
-      overflow-x: auto;
-  }
-  #result-general-output details { /* Basic details styling for general view */
-      margin-top: 10px;
-      font-style: normal;
-  }
-  #result-general-output details summary {
-      font-weight: normal;
-      color: #007bff;
-      cursor: pointer;
-  }
-  #result-general-output details pre {
-      background-color: #f8f9fa;
-      padding: 5px;
-      border-radius: 3px;
-      margin-top: 5px;
-  }
-  
-  
-  .error-message {
-      color: #dc3545; /* Red for errors */
-      font-weight: bold;
-      background-color: #f8d7da; /* Light red background */
-      border: 1px solid #f5c6cb;
-      padding: 10px;
-      border-radius: 4px;
-      display: block;
-      margin-top: 10px;
-      font-style: normal;
-  }
-  
-  /* Helper class */
-  .hidden {
-    display: none !important;
-  }
-  
-  /* Responsiveness */
-  @media (max-width: 768px) {
-    .matrix-panels-container {
-        flex-direction: column; /* Stack panels vertically */
-        align-items: stretch; /* Stretch panels to full width */
-    }
-  
-    .matrix-operations-binary {
-        flex-direction: row; /* Arrange binary ops horizontally */
-        flex-wrap: wrap;
-        border: none;
-        border-top: 1px dashed var(--border-color);
-        border-bottom: 1px dashed var(--border-color);
-        margin: var(--panel-gap) 0; /* Add space between panels */
-        width: 100%; /* Take full width */
-        justify-content: center;
-        padding: 10px 5px; /* Reduce padding */
-    }
-  
-    .panel-header {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-  
-    .custom-expression {
-        flex-direction: column;
-        align-items: stretch;
-    }
-     #add-matrix-btn {
-          /* Tombol add bisa dipindah atau di-style ulang untuk mobile */
-          position: static; /* Override absolute if needed */
-          margin: 10px 0 0 auto; /* Contoh: di bawah dan kanan */
-          width: 30px;
-          height: 30px;
-          font-size: 1.2em;
-    }
-  
-    .controls {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-    .result-summary-display {
-        flex-direction: column;
-        align-items: center;
-        gap: 5px;
-    }
-    .result-main-actions {
-        justify-content: center; /* Center buttons on smaller screens */
-    }
-  }
-  
-  @media (max-width: 480px) {
-    body {
-        padding: 10px;
-    }
-    .matrix-calculator {
-        padding: 10px;
-    }
-    :root {
-        --input-size: 35px; /* Smaller inputs on very small screens */
-        --panel-gap: 15px;
-    }
-    .matrix-grid {
-        gap: 3px;
-    }
-    .op-btn, .dim-btn, .icon-btn {
-        font-size: 0.8em;
-        padding: 4px 8px;
-    }
-    .dimension-controls {
-        font-size: 0.8em;
-        flex-wrap: wrap; /* Allow controls to wrap */
-    }
-     .result-main-actions button {
-          font-size: 0.8em;
-          padding: 5px 8px;
-      }
-  }
+  --primary: #007bff;
+  --primary-hover: #0056b3;
+  --secondary: #6c757d;
+  --secondary-hover: #5a6268;
+  --light-gray: #f8f9fa;
+  --border-gray: #ccc;
+  --text-dark: #212529;
+  --text-muted: #495057;
+  --white: #fff;
+}
+
+body {
+  font-family: sans-serif;
+  margin: 0;
+  padding: 20px;
+  background-color: var(--light-gray);
+  color: #333;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: var(--white);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+h1, h2 {
+  color: var(--primary);
+  margin: 0;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+h2 {
+  font-size: 20px;
+}
+
+.matrix-section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.matrix-container {
+  flex: 1;
+  min-width: 300px;
+  border: 1px solid var(--border-gray);
+  border-radius: 8px;
+  padding: 15px;
+  background-color: var(--white);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.matrix-input {
+  display: grid;
+  grid-template-columns: repeat(3, 40px);
+  grid-template-rows: repeat(3, 40px);
+  gap: 5px;
+  justify-content: center;
+  background-color: #f9f9f9;
+  border: 1px solid var(--border-gray);
+  padding: 5px;
+  border-radius: 4px;
+  margin: auto;
+}
+
+.matrix-input input,
+.matrix-input input[type="text"] {
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  border: 1px solid var(--border-gray);
+  border-radius: 4px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+.matrix-ops {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.matrix-ops button,
+.matrix-buttons button {
+  background-color: var(--primary);
+  color: var(--white);
+  padding: 6px 10px;
+  font-size: 14px;
+}
+
+.matrix-ops button:hover,
+.matrix-buttons button:hover {
+  background-color: var(--primary-hover);
+}
+
+.matrix-buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px 15px;
+  border: 1px dashed var(--border-gray);
+  border-top: none;
+  border-bottom: none;
+  background-color: #fdfdfd;
+  border-radius: 6px;
+  align-self: center;
+}
+
+.hasil-section {
+  margin-top: 20px;
+  background-color: #e9ecef;
+  padding: 15px;
+  border-radius: 8px;
+  border: 1px solid var(--border-gray);
+}
+
+.matrix-output {
+  font: 1.3rem 'Courier New', monospace;
+  text-align: center;
+  background-color: var(--white);
+  padding: 10px;
+  border-radius: 4px;
+  color: #000;
+  overflow-x: auto;
+}
+
+#hasil {
+  white-space: pre;
+  font-family: inherit;
+  color: var(--text-dark);
+}
+
+.hasil-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.reset-button {
+  background-color: var(--secondary);
+  color: var(--white);
+  padding: 6px 12px;
+  font-size: 14px;
+}
+
+.reset-button:hover {
+  background-color: var(--secondary-hover);
+}
+
+#scalarA, #scalarB {
+  width: 60px;
+  padding: 5px;
+  border: 1px solid var(--primary);
+  border-radius: 4px;
+}
+
+.matrix-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border-gray);
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+}
+
+.matrix-header h2 {
+  padding-bottom: 7px;
+}
+
+.matrix-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.matrix-controls button {
+  background-color: #f0f0f0;
+  color: black;
+  border: 1px solid var(--border-gray);
+  padding: 4px 8px;
+  font-size: 13px;
+}
+
+.matrix-controls button:hover {
+  background-color: var(--secondary-hover);
+  color: var(--white);
+}
+
+.text-Hasil {
+  color: var(--text-muted);
+}
+

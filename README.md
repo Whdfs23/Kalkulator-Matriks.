@@ -41,5 +41,4 @@ Aplikasi web interaktif untuk melakukan berbagai operasi matriks secara dinamis,
    ```bash
     python app.py](http://localhost:5000
    ```
-## Demo
    

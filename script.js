@@ -234,11 +234,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 case 'trans': result=transpose(matrix); opDesc=`Transpose(${matrixName})`; break;
                 case 'rank': result=rank(matrixData); opDesc=`Rank(${matrixName})`; break; // Placeholder
                 case 'rref': result=rowEchelonForm(matrix); opDesc=`RREF(${matrixName})`; break;
-                case 'lu': result=luDecomposition(matrix); opDesc=`LU Decomp(${matrixName})`; break;
-                case 'chol': result=choleskyDecomposition(matrix); opDesc=`Cholesky(${matrixName})`; break;
-                case 'diag': result=isDiagonal(matrix); opDesc=`Is ${matrixName} Diagonal?`; break;
-                case 'mul-scalar': const sVal=parseFloat(document.getElementById(`scalar-${matrixName}`)?.value); if(isNaN(sVal)){showError("Invalid scalar.");return;} result=multiplyScalar(cloneMatrix(matrix),sVal); opDesc=`${formatNumber(sVal)}*${matrixName}`; break;
-                case 'pow': const exp=parseInt(document.getElementById(`power-${matrixName}`)?.value); if(isNaN(exp)||exp<0){showError("Exp must be non-neg int.");return;} result=power(cloneMatrix(matrix),exp); opDesc=`${matrixName}^${exp}`; break;
                 default: showError(`Unknown op: ${op}`); return;
             }
             if(result!==undefined)displayResult(result,opDesc,null,sourceId);
